@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Store</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <%= csrf_meta_tags %>
+  </head>
+     <body class="<%= yield (:body_class) %>">
+
+      <nav id="app" class="navbar is-info" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <%= link_to root_path, class:"navbar-item" do %>
+            <h1 style="color:white" class="title is-5">Rails Store</h1>
+          <% end  %>
+
+          <a role="button" class="navbar-burger burger" v-on:click="showNav = !showNav" v-bind:class="{ 'is-active' : showNav }" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu" v-bind:class="{ 'is-active' : showNav }">
+
+          <div class="navbar-end">
+            <div  class="navbar-item">
+
+              <%= link_to 'About Us' , permalink_path(permalink: 'about_us') , class: "navbar-item is-white"%>
+              <%= link_to 'Contact Us', permalink_path(permalink: 'contact_us'), class: "navbar-item is-white" %>
+              <% if user_signed_in? %>
+                <%= link_to "Home", root_path, class: "navbar-item is-white" %>
+                <%= link_to "All Products", products_show_all_products_path, class: "navbar-item is-white" %>
+                <%= link_to pluralize(current_cart.items_count, 'item'), cart_path, class: "navbar-item is-white" %>
+                <div class="navbar-item is-white has-dropdown is-hoverable">
+                  <%= link_to 'Account', edit_user_registration_path, class: "navbar-link is-white" %>
+                  <div class="navbar-dropdown is-right">
+                    <%= link_to current_user.name, edit_user_registration_path, class:"navbar-item" %>
+                    <%= link_to "Log Out", destroy_user_session_path, method: :delete, class:"navbar-item" %>
+                  </div>
+                </div>
+              <% else %>
+                <div class="buttons">
+                  <%= link_to "Log In", new_user_session_path, class:"navbar-item is-white" %>
+                  <%= link_to "Sign up", new_user_registration_path, class:"navbar-item is-white"%>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+
+    <%= yield(:header) %>
+
+    <div class="container">
+        <div id="flow">
+            <span class="flow-1"></span>
+            <span class="flow-2"></span>
+            <span class="flow-3"></span>
+        </div>
+        <br>
+        <% if flash[:notice] %>
+        <div class=" notification is-success global-notification" ,style="position:relative">
+            <button class="delete"></button>
+          <p class="  notice"><%= notice %></p>
+        </div>
+      <% end %>
+      <% if flash[:alert] %>
+      <div class=" notification is-danger global-notification" ,style="position:relative">
+          <button class="delete"></button>
+        <p class=" alert"><%= alert %></p>
+      </div>
+      <% end %>
+            <%= yield %>
+
+        </div>
+    </div>
+    <%= javascript_pack_tag 'nav' %>
+  </body>
+</html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+  (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+    $notification = $delete.parentNode;
+    $delete.addEventListener('click', () => {
+      $notification.parentNode.removeChild($notification);
+    });
+  });
+});
+</script>
+
+<style>
+  #app {
+    background: black;
+  }
+  .is-white {
+    color:white;
+  }
+</style>

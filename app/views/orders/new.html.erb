@@ -1,0 +1,91 @@
+<div class="box" style="position:relative">
+    <h3 class="title is-3">Checkout</h3>
+    <% if user_signed_in? %>
+  <%= form_for @order, url: checkout_path do |f| %>
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+          <label class="label"><%= f.label :first_name %></label>
+      </div>
+       <%= f.text_field :first_name, :value => current_user.name, class: "field-body field control input" %>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">Address</label>
+        </div>
+         <%= f.text_field :first_name, :value => current_user.address, class: "field-body field control input" %>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">Postal Code</label>
+        </div>
+         <%= f.text_field :first_name, :value => current_user.postal_code, class: "field-body field control input" %>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">City</label>
+        </div>
+         <%= f.text_field :first_name, :value => current_user.city, class: "field-body field control input" %>
+    </div>
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">Province</label>
+        </div>
+         <%= f.text_field :first_name, :value => current_user.province, class: "field-body field control input" %>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label">
+          <!-- Left empty for spacing -->
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+                <%= f.submit 'Checkout', class: "button is-primary" %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+  <% end %>
+<% else %>
+<%= form_for @order, url: checkout_path do |f| %>
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+      <label class="label"><%= f.label :first_name %></label>
+  </div>
+   <%= f.text_field :first_name,class: "field-body field control input" %>
+</div>
+<div class="field is-horizontal">
+    <div class="field-label is-normal">
+        <label class="label"><%= f.label :last_name %></label>
+    </div>
+     <%= f.text_field :last_name, class: "field-body field control input" %>
+  </div>
+
+<div class="field is-horizontal">
+    <div class="field-label">
+      <!-- Left empty for spacing -->
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+            <%= f.submit 'Checkout', class: "button is-primary" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<% end %>
+<% end %>
+
+</div>
+
+

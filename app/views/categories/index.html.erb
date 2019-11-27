@@ -1,0 +1,22 @@
+
+<nav class="breadcrumb" aria-label="breadcrumbs" style="position:relative">
+        <ul>
+          <li> <%= link_to "Categories", categories_path, class: "subtitle is-3" %> </li>
+        </ul>
+      </nav>
+<div class="columns is-multiline .is-variable">
+    <% @categories.each do |category| %>
+  <div class="column is-3 is-one-quarter">
+      <div class="card medium">
+
+          <div class="card-content">
+              <div class="media">
+                  <div class="media-content">
+                      <p><%= link_to category.title, category_products_path(category) , class:"title is-4 no-padding" %></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <% end %>
+</div>

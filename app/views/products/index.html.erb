@@ -1,0 +1,12 @@
+<nav class="breadcrumb" aria-label="breadcrumbs" style="position:relative">
+    <ul>
+      <li> <%= link_to "Categories", root_path, class: "subtitle is-3" %> </li>
+      <li><%= link_to @category.title, "", class: " subtitle is-3" %></li>
+      <li class="subtitle is-3 is-active"> Products</li>
+
+    </ul>
+  </nav>
+
+    <div class="columns is-multiline">
+  <%= render @products %>
+    </div>

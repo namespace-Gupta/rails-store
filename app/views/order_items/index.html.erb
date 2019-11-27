@@ -1,0 +1,46 @@
+
+<div class="box", style="position: relative">
+    <h3 class="title is-3">Cart</h3>
+    <table class="table" >
+        <thead>
+          <tr>
+            <th><abbr title="Position">Product</abbr></th>
+            <th><abbr title="Goal difference">Price</abbr></th>
+            <th><abbr title="Points">Quantity</abbr></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+            <% @items.each do |item| %>
+            <tr>
+              <td><%= item.product.title %></td>
+              <td><%= number_to_currency item.price %></td>
+              <td>
+                <%= form_for item do %>
+                  <%= hidden_field_tag :product_id, item.product_id %>
+                  <%= number_field_tag :quantity, item.quantity, class: "select" %>
+                  <%= submit_tag "Update Cart", class: "button is-primary is-light" %>
+                <% end %>
+              </td>
+              <td>
+                <%= form_for item, method: :delete do |f| %>
+                  <%= f.submit "Remove", class: "button is-light is-danger" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tfoot>
+            <tr>
+              <td colspan="4" align="right">
+                <%= number_to_currency current_cart.sub_total %>
+              <td>
+            </tr>
+          </tfoot>
+      </table>
+
+      <% if(@items.count() >= 1) %>
+    <%= link_to 'Checkout', checkout_path , class: "button is-info is-rounded"%>
+    <% end %>
+</div>
+

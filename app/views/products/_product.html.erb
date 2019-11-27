@@ -1,0 +1,32 @@
+<div class="column is-one-third">
+    <div class="card large">
+        <div class="card-image">
+
+            <% if product.image.present? %>
+                <figure class="image">
+                    <%= image_tag product.image_url(:medium).to_s %>
+                </figure>
+              <% else %>
+              <figure class="image">
+                    <%= image_tag "https://bulma.io/images/placeholders/1280x960.png" %>
+              </figure>
+              <% end %>
+        </div>
+        <div class="card-content">
+            <div class="media">
+                <div class="media-content">
+                    <p class="title is-4 no-padding"><%= link_to product.title, product %></p>
+                </div>
+            </div>
+            <div class="content">
+                <%=product.description%>
+              <p></strong>$<%=product.price%></p>
+              <%= form_tag order_items_path , class: "field has-addons" do %>
+              <%= hidden_field_tag :product_id, product.id %>
+              <%= number_field_tag :quantity, 1, class: "control input" %>
+              <%= submit_tag "Add to Cart", class: "control button is-info" %>
+            <% end %>
+            </div>
+        </div>
+    </div>
+</div>
