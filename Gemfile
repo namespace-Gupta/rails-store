@@ -30,7 +30,7 @@ gem 'pg'
 gem 'faker'
 gem "mini_magick"
 gem 'simple_form'
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 2.1'
 gem 'figaro'
 gem 'fog'
 # Reduces boot times through caching; required in config/boot.rb
